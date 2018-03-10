@@ -51,56 +51,40 @@ export namespace Invokable {
       return f[call].apply(f, arguments);
     } as any) as T & T[typeof Invokable.call];
 
-    if (Object.getPrototypeOf(target) === Object.prototype) {
-      // A plain object was passed.
+    const isPlain = Object.getPrototypeOf(target) === Object.prototype;
+    const {constructor} = target;
 
-      const hasName = 'name' in target;
-      Object.defineProperty(f, 'name', {
-        configurable: true,
-        enumerable: hasName,
-        writable: hasName,
-        // Default to the `[Invokable.call]` function name, if it had any.
-        value: target[call].name,
-      });
-
+    const hasOwnName: boolean = Object.prototype.hasOwnProperty.call(
+      target,
+      'name',
+    );
+    Object.defineProperty(f, 'name', {
+      configurable: true,
+      enumerable: hasOwnName,
+      writable: hasOwnName,
       /**
-       * Replicate all own properties, including getters and setters, without
-       * invoking those getters and setters.
+       * Default to the surrounding class's name, or the `[Invokable.call]`
+       * function name if given a plain object.
        */
-      Object.defineProperties(f, Object.getOwnPropertyDescriptors(target));
+      value: isPlain ? target[call].name : constructor.name,
+    });
 
-      return f;
-    } else {
-      // An instantiated object was passed.
-      const {constructor} = target;
+    /**
+     * Replicate all own properties, including getters and setters, without
+     * invoking those getters and setters.
+     */
+    Object.defineProperties(f, Object.getOwnPropertyDescriptors(target));
 
-      const hasOwnName: boolean = Object.prototype.hasOwnProperty.call(
-        target,
-        'name',
-      );
-      Object.defineProperty(f, 'name', {
-        configurable: true,
-        enumerable: hasOwnName,
-        writable: hasOwnName,
-        // Default to the surrounding class's name.
-        value: constructor.name,
-      });
-
-      /**
-       * Replicate all own properties, including getters and setters, without
-       * invoking those getters and setters.
-       */
-      Object.defineProperties(f, Object.getOwnPropertyDescriptors(target));
-
-      /**
-       * Mirror the prototype of the original object, allowing properties
-       * defined on the prototype to resolve properly. Furthermore, lower-level
-       * operations like the `instanceof` operator and accessing the
-       * `constructor` property continue to work as expected.
-       */
+    /**
+     * Mirror the prototype of the original object, allowing properties
+     * defined on the prototype to resolve properly. Furthermore, lower-level
+     * operations like the `instanceof` operator and accessing the
+     * `constructor` property continue to work as expected.
+     */
+    if (!isPlain) {
       Object.setPrototypeOf(f, constructor.prototype);
-
-      return f;
     }
+
+    return f;
   }
 }
