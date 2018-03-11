@@ -31,10 +31,13 @@
   },
   "homepage": "https://github.com/kourge/invokable#readme",
   "devDependencies": {
+    "@types/benchmark": "^1.0.31",
     "@types/jest": "^22.2.0",
+    "benchmark": "^2.1.4",
     "jest": "^22.4.2",
     "prettier": "^1.11.1",
     "ts-jest": "^22.4.1",
+    "ts-node": "^5.0.1",
     "typescript": "^2.7.2"
   },
   "jest": {
