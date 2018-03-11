@@ -93,7 +93,7 @@ It cannot:
 TypeScript support comes out of the box without any additional setup. Here is
 the TypeScript version of the class example:
 
-```js
+```ts
 import {Invokable} from 'invokable';
 
 class Rect {
@@ -120,7 +120,7 @@ order make class instances callable to the type system.
 
 The TypeScript version of the plain object example:
 
-```js
+```ts
 import {Invokable} from 'invokable';
 
 const Rect = (width: number, height: number) =>
