@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "a way to make invokable JavaScript objects",
   "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "directories": {
     "lib": "lib"
   },
