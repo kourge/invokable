@@ -1,6 +1,6 @@
 {
   "name": "invokable",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "a way to make invokable JavaScript objects",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -47,6 +47,13 @@
       "^.+\\.tsx?$": "ts-jest"
     },
     "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
-    "moduleFileExtensions": ["ts", "tsx", "js", "jsx", "json", "node"]
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ]
   }
 }
