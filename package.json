@@ -27,6 +27,9 @@
     "class"
   ],
   "author": "Wil Lee <kourge@gmail.com>",
+  "contributors": [
+    "Michal Vlasák <daeatel@gmail.com>"
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/kourge/invokable/issues"
