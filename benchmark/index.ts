@@ -25,7 +25,7 @@ function bench(name?: string, options?: Benchmark.Options): Suite {
             (test as any).name,
             test.hz.toFixed(0),
             `±${test.stats.rme.toFixed(2)}%`,
-            (100 * test.hz / best.hz).toFixed(2) + '%',
+            ((100 * test.hz) / best.hz).toFixed(2) + '%',
           ].join(' | ') +
           ' |',
       );

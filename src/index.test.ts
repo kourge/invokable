@@ -132,7 +132,7 @@ describe('Invokable.create', () => {
   describe('when given a class instance', () => {
     it('throws given a non-conforming target', () => {
       expect(() => {
-        Invokable.create(new class {}() as Invokable);
+        Invokable.create(new (class {})() as Invokable);
       }).toThrow(TypeError);
     });
 
