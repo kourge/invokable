@@ -159,7 +159,28 @@ const Rect = (width: number, height: number) =>
   });
 ```
 
+## Performance
+
+The following observations are based on the benchmarks listed further below.
+
+* Creating an invokable object is very slow. Doing so for a plain object incurs
+  around a 7x slowdown, whereas doing so for a class instance can suffer from
+  around a 700x slowdown. Therefore, avoid performing a huge number of calls to
+  `Invokable.create` in a hot code path.
+* Property access, regardless of whether or not through the prototype, is not
+  significantly impacted.
+* Invoking the invokable object itself is also not guaranteed to be faster than
+  directly invoking the method it points to.
+
+## Inspiration
+
+`invokable` is inspired by the
+[`callable-object`](https://github.com/za-creature/callable-object) project.
+
 ## Benchmarks
+
+To run these on your machine, run `npm run bench`. The process typically takes
+a few minutes, and directly writes results to STDOUT as they finish running.
 
 Results were measured on an Intel Core M @ 1.2GHz with 8GB of DDR3-1600 on
 Node.JS v8.3.0. Throughput numbers are expressed in operations per second (ops).
@@ -285,19 +306,3 @@ Node.JS v8.3.0. Throughput numbers are expressed in operations per second (ops).
 | `instance.__call__()`        |    6898069 | ±2.00% |          94.93% |
 | `instance[Invokable.call]()` |    7040076 | ±3.05% |          96.88% |
 | `instance()`                 |    7266453 | ±2.24% |         100.00% |
-
-## Performance
-
-* Creating an invokable object is very slow. Doing so for a plain object incurs
-  around a 7x slowdown, whereas doing so for a class instance can suffer from
-  around a 700x slowdown. Therefore, avoid performing a huge number of calls to
-  `Invokable.create` in a hot code path.
-* Property access, regardless of whether or not through the prototype, is not
-  significantly impacted.
-* Invoking the invokable object itself is also not guaranteed to be faster than
-  directly invoking the method it points to.
-
-## Inspiration
-
-`invokable` is inspired by the
-[`callable-object`](https://github.com/za-creature/callable-object) project.
