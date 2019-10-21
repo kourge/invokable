@@ -305,4 +305,23 @@ describe('Invokable.create', () => {
       expect(f instanceof C).toBe(true);
     });
   });
+
+  describe('when given an object with custom prototype', () => {
+    it('chains the prototype correctly', () => {
+      const proto = {
+        foo() {
+          return newValue;
+        }
+      }
+      const c = {
+        [Invokable.call]() {}
+      }
+      Object.setPrototypeOf(c, proto);
+
+      const f = Invokable.create(c);
+
+      expect(f.foo).toBeDefined();
+      expect(f.foo()).toBe(newValue);
+    });
+  });
 });
