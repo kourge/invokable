@@ -311,14 +311,14 @@ describe('Invokable.create', () => {
       const proto = {
         foo() {
           return newValue;
-        }
-      }
+        },
+      };
       const c = {
-        [Invokable.call]() {}
-      }
+        [Invokable.call]() {},
+      };
       Object.setPrototypeOf(c, proto);
 
-      const f = Invokable.create(c);
+      const f: typeof proto & typeof c = Invokable.create(c) as any;
 
       expect(f.foo).toBeDefined();
       expect(f.foo()).toBe(newValue);
