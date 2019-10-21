@@ -86,9 +86,9 @@ It cannot:
   returned.
 * Do anything with an object that does not implement `[Invokable.call]`. A
   `TypeError` is thrown when such an object is given.
-* Work on JavaScript engines that don't support `Object.setPrototype`,
-  `Object.getOwnPropertyDescriptors`, and `Object.defineProperties`, unless
-  they have been polyfilled.
+* Work on JavaScript engines that don't support `Object.setPrototypeOf`,
+  `Object.getPrototypeOf`, `Object.getOwnPropertyDescriptors`, and
+  `Object.defineProperties`, unless they have been polyfilled.
 * Be rebound using `.bind(...)`. However, the `[Invokable.call]` method can
   still be rebound.
 
