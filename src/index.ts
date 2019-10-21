@@ -82,7 +82,7 @@ export namespace Invokable {
      * `constructor` property continue to work as expected.
      */
     if (!isPlain) {
-      Object.setPrototypeOf(f, constructor.prototype);
+      Object.setPrototypeOf(f, Object.getPrototypeOf(target));
     }
 
     return f;
