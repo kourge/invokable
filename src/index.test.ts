@@ -114,10 +114,10 @@ describe('Invokable.create', () => {
     });
 
     it('replicates a setter', () => {
-      let value = oldValue;
+      let value: any = oldValue;
       const target = {
         [Invokable.call]() {},
-        set v(x) {
+        set v(x: any) {
           value = x;
         },
       };
@@ -256,10 +256,10 @@ describe('Invokable.create', () => {
     });
 
     it('replicates a setter', () => {
-      let value = oldValue;
+      let value: any = oldValue;
       class C {
         [Invokable.call]() {}
-        set v(x) {
+        set v(x: any) {
           value = x;
         }
       }
