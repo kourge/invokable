@@ -1,6 +1,6 @@
 {
   "name": "invokable",
-  "version": "1.0.2",
+  "version": "1.0.3-rc0",
   "description": "a way to make invokable JavaScript objects",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
