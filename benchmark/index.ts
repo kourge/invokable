@@ -1,6 +1,6 @@
 import Benchmark from 'benchmark';
 
-import {Invokable} from '../src';
+import {Invokable} from '../index';
 
 interface Suite extends Benchmark.Suite {
   on(type?: string, callback?: (this: Suite) => any): this;

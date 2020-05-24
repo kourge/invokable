@@ -4,7 +4,7 @@
     "lib": ["es2015", "es2017.object"],
     "module": "commonjs",
     "declaration": true,
-    "outDir": "./lib",
+    "outDir": "./",
     "strict": true,
     "alwaysStrict": true,
 
@@ -15,6 +15,6 @@
 
     "esModuleInterop": true
   },
-  "include": ["./src/**/*"],
-  "exclude": ["./src/**/*.test.ts"]
+  "include": ["./**/*"],
+  "exclude": ["./**/*.test.ts"]
 }

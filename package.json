@@ -2,11 +2,7 @@
   "name": "invokable",
   "version": "1.0.3",
   "description": "a way to make invokable JavaScript objects",
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
-  "directories": {
-    "lib": "lib"
-  },
+  "main": "index.js",
   "scripts": {
     "test": "jest",
     "build": "tsc",
