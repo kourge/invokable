@@ -31,9 +31,9 @@ export namespace Invokable {
    *
    * @throws {TypeError} if object does not implement `[Invokable.call]`
    */
-  export function create<T extends Invokable>(
-    target: T,
-  ): T & T[typeof Invokable.call] {
+  export function create<Target extends Invokable>(
+    target: Target,
+  ): Target & Target[typeof Invokable.call] {
     if (!(call in target)) {
       throw new TypeError('Object does not implement [Invokable.call]');
     }
@@ -49,7 +49,7 @@ export namespace Invokable {
      */
     const f = (function() {
       return f[call].apply(f, arguments);
-    } as any) as T & T[typeof Invokable.call];
+    } as any) as Target & Target[typeof Invokable.call];
 
     const isPlain = Object.getPrototypeOf(target) === Object.prototype;
     const {constructor} = target;
