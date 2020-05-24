@@ -3,6 +3,12 @@
   "version": "1.0.3",
   "description": "a way to make invokable JavaScript objects",
   "main": "index.js",
+  "files": [
+    "*.d.ts",
+    "*.d.ts.map",
+    "*.js",
+    "*.js.map"
+  ],
   "scripts": {
     "test": "jest",
     "build": "tsc",
