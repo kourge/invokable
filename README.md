@@ -1,15 +1,16 @@
 # invokable
 
-A way to make invokable JavaScript objects. Reminiscent of Python's [`__call__`](https://docs.python.org/3/reference/datamodel.html#object.__call__).
+A way to make invokable JavaScript objects. Reminiscent of Python's
+[`__call__`](https://docs.python.org/3/reference/datamodel.html#object.__call__).
 
-* [Installation](#installation)
-* [Usage](#usage)
-* [Capabilities and Limitations](#capabilities-and-limitations)
-* [API](#api)
-* [TypeScript Support](#typescript-support)
-* [Benchmarks](#benchmarks)
-* [Performance](#performance)
-* [Inspiration](#inspiration)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Capabilities and Limitations](#capabilities-and-limitations)
+- [API](#api)
+- [TypeScript Support](#typescript-support)
+- [Benchmarks](#benchmarks)
+- [Performance](#performance)
+- [Inspiration](#inspiration)
 
 ## Installation
 
@@ -41,9 +42,9 @@ class Rect {
 }
 ```
 
-* Implement a method with the computed name `[Invokable.call]` with any
+- Implement a method with the computed name `[Invokable.call]` with any
   signature of your choice.
-* End the constructor with `return Invokable.create(this)`
+- End the constructor with `return Invokable.create(this)`.
 
 Also works with a plain object:
 
@@ -63,38 +64,38 @@ const Rect = (width, height) =>
   });
 ```
 
-* Declare a property with the computed name `[Invokable.call]` with any
-  function of your choice.
-* Pass the entire object to `Invokable.create`
+- Declare a property with the computed name `[Invokable.call]` with any function
+  of your choice.
+- Pass the entire object to `Invokable.create`
 
 ## Capabilities and Limitations
 
 `Invokable.create` can:
 
-* Preserve the `this` context of the object.
-* Do the right thing when an object's `[Invokable.call]` method has been
+- Preserve the `this` context of the object.
+- Do the right thing when an object's `[Invokable.call]` method has been
   replaced at runtime.
-* Replicate all properties without triggering getters and setters.
-* Inherit the same prototype, ensuring things like `constructor` and the
+- Replicate all properties without triggering getters and setters.
+- Inherit the same prototype, ensuring things like `constructor` and the
   `instanceof` operator still work.
-* Create functions whose `name` property is writable. Simply define a `name`
+- Create functions whose `name` property is writable. Simply define a `name`
   property in the original target object.
 
 It cannot:
 
-* Modify the original object. A new object that masquerades as the original is
+- Modify the original object. A new object that masquerades as the original is
   returned.
-* Do anything with an object that does not implement `[Invokable.call]`. A
+- Do anything with an object that does not implement `[Invokable.call]`. A
   `TypeError` is thrown when such an object is given.
-* Work on JavaScript engines that don't support `Object.setPrototypeOf`,
+- Work on JavaScript engines that don't support `Object.setPrototypeOf`,
   `Object.getPrototypeOf`, `Object.getOwnPropertyDescriptors`, and
   `Object.defineProperties`, unless they have been polyfilled.
-* Be rebound using `.bind(...)`. However, the `[Invokable.call]` method can
+- Be rebound using `.bind(...)`. However, the `[Invokable.call]` method can
   still be rebound.
 
 ## API
 
-* `Invokable.create(target)` takes a `target` object that conforms to the
+- `Invokable.create(target)` takes a `target` object that conforms to the
   `Invokable` interface and returns a new object that is a function that
   masquerades as the original `target` object. All properties, values, getters,
   setters, or otherwise are replicated, including the prototype.
@@ -104,10 +105,10 @@ It cannot:
   `name` property will be made writable in the result. In all cases, the `name`
   property will default to the original function or surrounding class name.
 
-  If the `target` object does not implement `[Invokable.call]`, a `TypeError`
-  is thrown.
+  If the `target` object does not implement `[Invokable.call]`, a `TypeError` is
+  thrown.
 
-* `Invokable.call` is a tag that denotes callability. It is a constant used by
+- `Invokable.call` is a tag that denotes callability. It is a constant used by
   an object to conform to the `Invokable` interface. Its current value is the
   string `__call__`, but it may become a symbol in the future.
 
@@ -163,13 +164,13 @@ const Rect = (width: number, height: number) =>
 
 The following observations are based on the benchmarks listed further below.
 
-* Creating an invokable object is very slow. Doing so for a plain object incurs
+- Creating an invokable object is very slow. Doing so for a plain object incurs
   around a 7x slowdown, whereas doing so for a class instance can suffer from
   around a 700x slowdown. Therefore, avoid performing a huge number of calls to
   `Invokable.create` in a hot code path.
-* Property access, regardless of whether or not through the prototype, is not
+- Property access, regardless of whether or not through the prototype, is not
   significantly impacted.
-* Invoking the invokable object itself is also not guaranteed to be faster than
+- Invoking the invokable object itself is also not guaranteed to be faster than
   directly invoking the method it points to.
 
 ## Inspiration
@@ -179,8 +180,8 @@ The following observations are based on the benchmarks listed further below.
 
 ## Benchmarks
 
-To run these on your machine, run `npm run bench`. The process typically takes
-a few minutes, and directly writes results to STDOUT as they finish running.
+To run these on your machine, run `npm run bench`. The process typically takes a
+few minutes, and directly writes results to STDOUT as they finish running.
 
 Results were measured on an Intel Core M @ 1.2GHz with 8GB of DDR3-1600 on
 Node.JS v8.3.0. Throughput numbers are expressed in operations per second (ops).
