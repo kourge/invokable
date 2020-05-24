@@ -46,6 +46,16 @@
     "ts-node": "8.4.1",
     "typescript": "3.6.4"
   },
+  "prettier": {
+    "printWidth": 80,
+    "tabWidth": 2,
+    "useTabs": false,
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "all",
+    "bracketSpacing": false,
+    "jsxBracketSameLine": false
+  },
   "jest": {
     "preset": "ts-jest"
   }
