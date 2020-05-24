@@ -11,7 +11,9 @@
   ],
   "scripts": {
     "test": "jest",
-    "build": "tsc",
+    "build": "tsc --build tsconfig.build.json --verbose",
+    "clean": "tsc --build tsconfig.build.json --clean",
+    "prepublishOnly": "npm-run-all clean build",
     "bench": "ts-node ./benchmark/index.ts"
   },
   "repository": {
@@ -43,6 +45,7 @@
     "@types/node": "12.11.2",
     "benchmark": "2.1.4",
     "jest": "24.9.0",
+    "npm-run-all": "^4.1.5",
     "prettier": "1.18.2",
     "ts-jest": "24.1.0",
     "ts-node": "^8.4.1",
